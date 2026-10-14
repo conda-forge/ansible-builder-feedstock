@@ -44,8 +44,17 @@ tests:
       run:
         - pip
         - python
+        - pytest
+        - pytest-mock
+        - filelock
+    files:
+      source:
+        - test/conftest.py
+        - test/data/
+        - test/unit/
     script:
       - ansible-builder --help
+      - pytest -vv
 
 about:
   summary: A tool for building Ansible Execution Environments
