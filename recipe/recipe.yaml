@@ -8,13 +8,13 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/a/ansible-builder/ansible_builder-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/a/ansible-builder/ansible_builder-${{ version }}.tar.gz
   sha256: 8cd8639011127aaa5046fd60e56ae753eb599061bf493eca2c6b75c54cfc6212
 
 build:
-  noarch: python
   number: 0
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
   python:
     entry_points:
       - ansible-builder = ansible_builder.cli:run
@@ -22,9 +22,9 @@ build:
 requirements:
   host:
     - python ${{ python_min }}.*
+    - setuptools >=77.0.3,<=84.0.0
+    - setuptools-scm >=6.2,<=10.3.4
     - pip
-    - setuptools <=70.0.0,>=45
-    - setuptools_scm <=8.1.0,>=6.2
   run:
     - python >=${{ python_min }}
     - bindep
@@ -40,10 +40,15 @@ tests:
         - ${{ python_min }}.*
         - "*"
       pip_check: true
+  - requirements:
+      run:
+        - pip
+        - python
+    script:
+      - ansible-builder --help
 
 about:
-  summary: |
-    "A tool for building Ansible Execution Environments"
+  summary: A tool for building Ansible Execution Environments
   homepage: https://ansible-builder.readthedocs.io
   repository: https://ansible-builder.readthedocs.io
   license: Apache-2.0
