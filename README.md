@@ -7,7 +7,7 @@ Home: https://ansible-builder.readthedocs.io/
 
 Package license: Apache-2.0
 
-Summary: "A tool for building Ansible Execution Environments"
+Summary: A tool for building Ansible Execution Environments
 
 Development: https://ansible-builder.readthedocs.io/
 
